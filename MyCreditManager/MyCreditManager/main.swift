@@ -168,7 +168,7 @@ func deletingStudent() {
         }
     }
 }
-
+  
 
 
 checkInput()
