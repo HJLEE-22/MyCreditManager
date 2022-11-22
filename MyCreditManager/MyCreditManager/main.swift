@@ -116,14 +116,6 @@ private func addingCredits() {
             checkInput()
             // 정상 추가/변경되는 경우
         } else if studentsArray.contains(where: { $0[0] == splittedInputArray[0] && $0.endIndex == 1 }) {
-                
-                /*
-                 오류 발견 :
-                 성적을 입력하지 않은 학생의 이름이 array에 남아있을 때도 여기 조건문 실행
-                 수정을 해야하는데 추가 입력이 되버린다.
-                 필요한 것 : 입력한 이름과 endIndex 조건 동시에 걸기.
-                 */
-                
                 // 학생이름은 있지만 성적이 아무것도 없을때
                 var studentIndex = studentsArray.firstIndex(where: { $0[0] == splittedInputArray[0]  })!
                 studentsArray[studentIndex].append(String(splittedInputArray[1]))
@@ -132,13 +124,9 @@ private func addingCredits() {
                 //                                print("\(splittedInputArray[0]) 학생의 \(splittedInputArray[1]) 과목이 \(splittedInputArray[2])로 추가 되었습니다.")
                 checkInput()
                 
-
         } else if studentsArray.filter({ $0.endIndex == 3 }).contains(where: { $0[0] == splittedInputArray[0] && $0[1] == splittedInputArray[1] }) {
                 // 같은 과목의 성적이 있을 때
             var studentAndSubjectIndex = studentsArray.firstIndex(where: { $0[0] == splittedInputArray[0] && $0[1] == splittedInputArray[1] })!
-            // 오류 발생
-            // filter로 하면, 뒤의 인덱스 아웃레인지 오류는 방지할 수 있지만
-            // filter된 어레이에서의 해당 index를 가져옴으로서 전체 unfiltered array와는 index 다름.
                 studentsArray[studentAndSubjectIndex].remove(at: 2)
                 studentsArray[studentAndSubjectIndex].append(String(splittedInputArray[2]))
                 print("\(splittedInputArray[0]) 학생의 \(splittedInputArray[1]) 과목이 \(splittedInputArray[2])로 추가(변경) 되었습니다.")
@@ -146,9 +134,6 @@ private func addingCredits() {
                 checkInput()
         } else if studentsArray.filter({ $0.endIndex == 3 }).contains(where: { $0[0] == splittedInputArray[0] && $0[1] != splittedInputArray[1] }){
             // 다른 과목의 성적을 추가할 때
-            // 성적이 입력되어 있지만 입력한 과목과 같지 않을 때
-            // .filter 함수 이유 : 인덱스를 통한 서브스크립트 접근 오류 방지
-            
             studentsArray.append([String(splittedInputArray[0]), String(splittedInputArray[1]), String(splittedInputArray[2])])
             print("\(splittedInputArray[0]) 학생의 \(splittedInputArray[1]) 과목이 \(splittedInputArray[2])로 추가(변경) 되었습니다.")
             //                                print("\(splittedInputArray[0]) 학생의 \(splittedInputArray[1]) 과목이 \(splittedInputArray[2])로 추가 되었습니다.")
@@ -156,7 +141,6 @@ private func addingCredits() {
         }
     }
 }
-
 
 private func deletingCredits(){
     print("성적을 삭제할 학생의 이름, 과목 이름을 띄어쓰기로 구분하여 차례로 작성해주세요.\n입력예) Mickey Swift")
@@ -184,7 +168,6 @@ private func deletingCredits(){
         }
     }
 }
-
 
 private func calculatingAverage() {
     print("평점을 알고싶은 학생의 이름을 입력해주세요")
